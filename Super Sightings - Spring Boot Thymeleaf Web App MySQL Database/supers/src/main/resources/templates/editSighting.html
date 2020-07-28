@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!--Required meta tags--> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!--Bootstrap CSS--> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <title>Edit Sighting</title>
+    </head>
+    <body>
+        <!--Main Body of Page--> 
+        <div class="container">
+            <div class="row m-4">
+                <div class="col text-center border border-dark">
+                    <h1>Edit Sighting</h1>
+                </div>
+            </div>
+            <div class="row m-4">
+                <div class="col text-center border border-dark">
+                    <p>Welcome to the edit Sighting Page.  Here you can edit the selected Sighting</p>
+                </div>
+            </div>
+            <div class="row m-4 border border-dark">
+                <div class="col text-center m-3">
+                    <a href="/" class="btn btn-outline-primary btn-lg">Home</a>
+                </div>
+            </div>
+            <div class="row m-4 border border-dark">
+                <div class="col text-center m-3">
+                    <a href="/sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/heroes" class="btn btn-outline-primary btn-lg">Heroes</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/powers" class="btn btn-outline-primary btn-lg">Powers</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/locations" class="btn btn-outline-primary btn-lg">Locations</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
+                </div>
+            </div>
+
+            <div class="row m-4 border border-dark">
+                <div class="col-3 text-center m-3">
+                    <span class="h3">Edit Sighting</span>
+                </div>
+                <div class="col-7 text-center m-3">
+                    <form action="editSighting" method="POST">
+                        <div class="form-group row">
+                            <label for="date" class="col-3 col-form-label">
+                                Date</label>
+                            <div class="col-9">
+                                <input th:value="${sighting.date}" type="date" name="date" 
+                                       id="date" class="form-control"/>
+                                <div th:if="${#fields.hasErrors('sighting.date')}">
+                                    <p th:each="error : ${#fields.errors('sighting.date')}" class="alert alert-danger"
+                                       th:text="${error}">Bad Date</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="locations" class="col-3 col-form-label">
+                                Locations</label>
+                            <div class="col-9">
+                                <select id="locations" name="location.id" class="form-control" >
+                                    <option th:each="location : ${locations}" 
+                                            th:value="${location.id}" 
+                                            th:text="${location.name}"
+                                            th:selected="${location.id == sighting.location.id}">
+                                        Location</option>
+                                </select>
+                            </div>
+                            <div th:if="${#fields.hasErrors('sighting.location')}">
+                                <p th:each="error : ${#fields.errors('sighting.location')}" class="alert alert-danger mt-4"
+                                   th:text="${error}"></p>
+                            </div>
+                        </div>
+
+                        
+                        
+                        <div class="form-group row">
+                            <label for="heroes" class="col-3 col-form-label">
+                                Heroes</label>
+                            <div class="col-9">
+                                <select id="heroes" name="hero.id" class="form-control" >
+                                    <option th:each="hero : ${heroes}" 
+                                            th:value="${hero.id}" 
+                                            th:text="${hero.name}"
+                                            th:selected="${hero.id == sighting.hero.id}">
+                                        Hero</option>
+                                </select>
+                            </div>
+                            <div th:if="${#fields.hasErrors('sighting.hero')}">
+                                <p th:each="error : ${#fields.errors('sighting.hero')}" class="alert alert-danger mt-4"
+                                   th:text="${error}"></p>
+                            </div>
+                        </div>
+
+                        <input  type="hidden" th:value="${sighting.id}" name="id"/>
+                        <button type="submit" class="btn btn-primary">Edit Sighting</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--End main body--> 
+
+        <!--Optional JavaScript--> 
+        <!--jQuery first, then Popper.js, then Bootstrap JS--> 
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

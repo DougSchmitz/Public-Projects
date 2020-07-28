@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!--Required meta tags--> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!--Bootstrap CSS--> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <title>Edit Hero</title>
+    </head>
+    <body>
+        <!--Main Body of Page--> 
+        <div class="container">
+            <div class="row m-4">
+                <div class="col text-center border border-dark">
+                    <h1>Edit Hero</h1>
+                </div>
+            </div>
+            <div class="row m-4">
+                <div class="col text-center border border-dark">
+                    <p>Welcome to the edit Hero Page.  Here you can edit the selected Hero</p>
+                </div>
+            </div>
+            <div class="row m-4 border border-dark">
+                <div class="col text-center m-3">
+                    <a href="/" class="btn btn-outline-primary btn-lg">Home</a>
+                </div>
+            </div>
+            <div class="row m-4 border border-dark">
+                <div class="col text-center m-3">
+                    <a href="/sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/heroes" class="btn btn-outline-primary btn-lg">Heroes</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/powers" class="btn btn-outline-primary btn-lg">Powers</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/locations" class="btn btn-outline-primary btn-lg">Locations</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
+                </div>
+            </div>
+
+            <div class="row m-4 border border-dark">
+                <div class="col-3 text-center m-3">
+                    <span class="h3">Edit Hero</span>
+                </div>
+                <div class="col-7 text-center m-3">
+                    <form action="editHero" method="POST">
+                        <div class="form-group row">
+                            <label for="name" class="col-3 col-form-label">
+                                Name</label>
+                            <div class="col-9">
+                                <input th:value="${hero.name}" type="text" name="name" 
+                                       id="name" class="form-control"/>
+                                <div th:if="${#fields.hasErrors('hero.name')}">
+                                    <p th:each="error : ${#fields.errors('hero.name')}" class="alert alert-danger mt-2"
+                                       th:text="${error}">Bad Name</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-3 col-form-label">
+                                Description</label>
+                            <div class="col-9">
+                                <input th:value="${hero.description}" type="text" name="description" 
+                                       id="description" class="form-control"/>
+                                <div th:if="${#fields.hasErrors('hero.description')}">
+                                    <p th:each="error : ${#fields.errors('hero.description')}" class="alert alert-danger mt-2"
+                                       th:text="${error}">Bad Description</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="powers" class="col-3 col-form-label">
+                                Powers</label>
+                            <div class="col-9">
+                                <select id="powers" name="powerId" class="form-control" >
+                                    <option th:each="power : ${powers}" 
+                                            th:value="${power.id}" 
+                                            th:text="${power.power}"
+                                            th:selected="${power.id == hero.superpower.id}">
+                                        Power</option>
+                                </select>
+                            </div>
+                            <div th:if="${#fields.hasErrors('hero.superpower')}">
+                                <p th:each="error : ${#fields.errors('hero.superpower')}" class="alert alert-danger mt-4"
+                                   th:text="${error}"></p>
+                            </div>
+                        </div>
+
+                        <p class="text-left">Organizations:</p>
+                        <div th:each="org : ${organizations}" class="form-group row">
+                            <div class="col-9 text-left ml-5">
+                                <input type="checkbox" name="orgId" 
+                                       th:checked="${hero.affiliatedOrganizaitons.contains(org)}"
+                                       th:value="${org.id}" class="form-check-input" >
+                                <label class="form-check-label" for="orgId" th:text="${org.name}"></label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div th:if="${#fields.hasErrors('hero.affiliatedOrganizaitons')}">
+                                <p th:each="error : ${#fields.errors('hero.affiliatedOrganizaitons')}" class="alert alert-danger mt-4"
+                                   th:text="${error}"></p>
+                            </div>
+                        </div>
+                        <input  type="hidden" th:value="${hero.id}" name="id"/>
+                        <button type="submit" class="btn btn-primary">Edit Hero</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--End main body--> 
+
+        <!--Optional JavaScript--> 
+        <!--jQuery first, then Popper.js, then Bootstrap JS--> 
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

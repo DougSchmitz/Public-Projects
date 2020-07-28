@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Vending Machine</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="css/home.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid m1">
+        <h1 class="text-center">Vending Machine</h1>
+        <hr />
+        <div class="row">
+
+            <div class="card-deck col-8" id="firstRow"></div>
+
+            <div class="container col-4">
+                <h3 class="card-title text-center m-auto">Total $ In</h3>
+                <div class="border border-medium p-2 mb-1 justify-content-around" id="totalInBox">
+                    <h5 class="text-center m-auto" id="totalInBoxValue">$</h5>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-success m-2" value=1.00; id="addDollar">Add Dollar</button>
+                        <button type="button" class="btn btn-success m-2" value=0.25; id="addQuarter">Add
+                            Quarter</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center mb-4">
+                        <button type="button" class="btn btn-success m-2" value=0.10; id="addDime">Add Dime</button>
+                        <button type="button" class="btn btn-success m-2" value=0.05; id="addNickel">Add Nickel</button>
+                    </div>
+                </div>
+                <hr />
+
+                <h3 class="card-title text-center m-auto">Messages</h3>
+                <div class="border border-medium p-2 mb-1 justify-content-around" id="messageBox">
+                    <h5 class="text-center m-auto" id="messageOutputLine"></h5>
+                </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="m-0 align-items-center">
+                        <h4>Item #</h4>
+                    </div>
+                    <div class="border border-medium p-2 m-0" id="itemSelectedBox">
+                        <h5 class="text-center m-auto" id="itemNumSelected"></h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-primary m-2" id="makePurchase" >Make Purchase</button>
+                    </div>
+                </div>
+                <hr />
+
+                <h3 class="card-title text-center m-auto">Change</h3>
+                <div class="border border-medium p-2 mb-1" id="changeBox">
+                    <h5 class="text-center mt-1" id="changeReturnOutput"></h5>
+                </div>
+                <div class="row">
+                    <div class="col text-center" id="changeReturnButton">
+                        <button type="button" class="btn btn-danger mt-2 mb-0" id="getChangeButton">Change
+                            Return</button>
+                    </div>
+                </div>
+                <hr />
+
+            </div>
+        </div>
+     <!-- </div> -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="js/home.js"></script>
+</body>
+
+</html>

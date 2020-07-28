@@ -1,0 +1,12 @@
+com\dss\movielibrary\controller\MovieLibraryController.class
+com\dss\movielibrary\dtos\Movie.class
+com\dss\movielibrary\ui\UserIO.class
+com\dss\movielibrary\dao\MovieLibraryDaoException.class
+com\dss\movielibrary\dao\MovieLibraryDaoFileImpl.class
+com\dss\movielibrary\services\BlankTitleException.class
+com\dss\movielibrary\App.class
+com\dss\movielibrary\services\MovieLibraryService.class
+com\dss\movielibrary\ui\UserIOConsoleImpl.class
+com\dss\movielibrary\dao\MovieLibraryInMemDao.class
+com\dss\movielibrary\ui\MovieLibraryView.class
+com\dss\movielibrary\dao\MovieLibraryDao.class

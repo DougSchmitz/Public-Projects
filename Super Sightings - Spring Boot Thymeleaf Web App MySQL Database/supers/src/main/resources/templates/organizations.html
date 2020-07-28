@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!--Required meta tags--> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!--Bootstrap CSS--> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <title>Organizations</title>
+    </head>
+    <body>
+        <!--Main Body of Page--> 
+        <div class="container">
+            <div class="row m-4">
+                <div class="col text-center border border-dark">
+                    <h1>Super Hero Organizations</h1>
+                </div>
+            </div>
+            <div class="row m-4">
+                <div class="col text-center border border-dark">
+                    <p>Welcome to the Organizations page.  Feel free to find, add, edit, or delete organizations.</p>
+                </div>
+            </div>
+            <div class="row m-4 border border-dark">
+                <div class="col text-center m-3">
+                    <a href="/" class="btn btn-outline-primary btn-lg">Home</a>
+                </div>
+            </div>
+            <div class="row m-4 border border-dark">
+                <div class="col text-center m-3">
+                    <a href="/sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/heroes" class="btn btn-outline-primary btn-lg">Heroes</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/powers" class="btn btn-outline-primary btn-lg">Powers</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/locations" class="btn btn-outline-primary btn-lg">Locations</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
+                </div>
+            </div>
+
+            <div class="row m-4 border border-dark">
+                <div class="col-3 text-center m-3">
+                    <span class="h3">Add Organization</span>
+                </div>
+                <div class="col-7 text-center m-3">
+                    <form action="addOrganization" method="POST">
+                        <div class="form-group row">
+                            <label for="name" class="col-3 col-form-label">
+                                Name</label>
+                            <div class="col-9">
+                                <input th:value="${organization.name}" type="text" name="name" 
+                                       id="name" class="form-control"/>
+                                <div th:if="${#fields.hasErrors('organization.name')}">
+                                    <p th:each="error : ${#fields.errors('organization.name')}" class="alert alert-danger mt-2"
+                                       th:text="${error}">Bad Name</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-3 col-form-label">
+                                Description</label>
+                            <div class="col-9">
+                                <input th:value="${organization.description}" type="text" name="description" 
+                                       id="description" class="form-control"/>
+                                <div th:if="${#fields.hasErrors('organization.description')}">
+                                    <p th:each="error : ${#fields.errors('organization.description')}" class="alert alert-danger mt-2"
+                                       th:text="${error}">Bad Description</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="address" class="col-3 col-form-label">
+                                Address</label>
+                            <div class="col-9">
+                                <input th:value="${organization.address}" type="text" name="address" 
+                                       id="address" class="form-control"/>
+                                <div th:if="${#fields.hasErrors('organization.address')}">
+                                    <p th:each="error : ${#fields.errors('organization.address')}" class="alert alert-danger mt-2"
+                                       th:text="${error}">Bad Address</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-3 col-form-label">
+                                Contact Email</label>
+                            <div class="col-9">
+                                <input th:value="${organization.email}" type="text" name="email" 
+                                       id="email" class="form-control"/>
+                                <div th:if="${#fields.hasErrors('organization.email')}">
+                                    <p th:each="error : ${#fields.errors('organization.email')}" class="alert alert-danger mt-2"
+                                       th:text="${error}">Bad Email</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-left">Heroes:</p>
+                        <div th:each="h : ${heroes}" class="form-group row">
+                            <div class="col-9 text-left ml-5">
+                                <input type="checkbox" name="heroId" 
+                                       th:checked="${organization.heroes.contains(h)}"
+                                       th:value="${h.id}" class="form-check-input" >
+                                <label class="form-check-label" for="heroId" th:text="${h.name}"></label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div th:if="${#fields.hasErrors('organization.heroes')}">
+                                <p th:each="error : ${#fields.errors('organization.heroes')}" class="alert alert-danger mt-4"
+                                   th:text="${error}"></p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Add Organization</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row m-4 border border-dark">
+                <div class="col text-center m-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Address</th>
+                                <th>Email</th>
+                                <th>Details</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="o : ${organizations}">
+                                <td th:text="${o.id}">Org ID</td>
+                                <td th:text='${o.name}'>Org Name</td>
+                                <td th:text='${o.description}'>Org Description</td>
+                                <td th:text='${o.address}'>Org Address</td>
+                                <td th:text='${o.email}'>Org Latitude</td>
+                                <td><a href="#" th:href="@{/organizationDetail(id=${o.id})}">Details</a></td>
+                                <td><a href="#" th:href="@{/display-editOrganization(id=${o.id})}">Edit</a></td>
+                                <td><a href="#" th:href="@{/deleteOrganization(id=${o.id})}">Delete</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--End main body--> 
+
+        <!--Optional JavaScript--> 
+        <!--jQuery first, then Popper.js, then Bootstrap JS--> 
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>
